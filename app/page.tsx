@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <GEL brand={wbc}>
       <div>
-        Welcome Home <WBCLogo align="center" />
+        Welcome Home <WBCLogo align="center" copyrightYear="2023" />
       </div>
     </GEL>
   );
