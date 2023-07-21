@@ -8,6 +8,7 @@ export default function Home() {
     <GEL brand={wbc}>
       <div>
         Welcome Home <WBCLogo align="center" copyrightYear="2023" />
+        <button className="btn btn-primary">Button</button>
       </div>
     </GEL>
   );
