@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import localFont from "next/font/local";
+import Navbar from "./components/Navbar";
+import BtmNav from "./components/BtmNav";
 
 // If loading a variable font, you don't need to specify the font weight
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -20,7 +22,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="mytheme">
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        <Navbar/>
+        <BtmNav/>
+        {children}
+        </body>
     </html>
   );
 }
