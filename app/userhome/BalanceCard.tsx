@@ -1,4 +1,4 @@
-"use client"
+
 export default function BalanceCard() {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 400px)' }}>

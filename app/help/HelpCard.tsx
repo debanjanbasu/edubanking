@@ -1,4 +1,3 @@
-import Link from "next/link";
 import HelpLink from "./HelpLink";
 
 export default function HelpCard() {

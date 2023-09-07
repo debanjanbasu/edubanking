@@ -7,7 +7,7 @@ export default async function Table() {
     return (
       <>
         <h1 className="font-bold text-2xl">Transactions</h1>
-        {transactions.map((transaction, index) => (
+        {transactions.map((transaction) => (
           <div key={transaction.id} className="bg-wh m-2 w-[300px]">
             <p>id: {transaction.id}</p>
             <p>name: {transaction.name}</p>

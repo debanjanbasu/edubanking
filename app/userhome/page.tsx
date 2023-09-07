@@ -1,13 +1,11 @@
-"use client"
-import { GEL } from "@westpac/core";
-import wbc from "@westpac/wbc";
+
+
 import BalanceCard from "./BalanceCard";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div style={{ background: "white", minHeight: "100vh" }}>
-      <GEL brand={wbc}>
         <div style={{ position: "relative", textAlign: "center" }}>
           <BalanceCard/>
           <div style={{ position: "relative", textAlign: "center" }}>
@@ -25,7 +23,6 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </GEL>
     </div>
   );
 }

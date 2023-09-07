@@ -1,9 +1,10 @@
+
 import "./globals.css";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import Navbar from "./components/Navbar";
-import BtmNav from "./components/BtmNav";
+import { BtmNav } from "./components/BtmNav";
 
 // If loading a variable font, you don't need to specify the font weight
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -15,11 +16,13 @@ export const metadata: Metadata = {
   description: "A platform for children to learn about banking",
 };
 
+type NewType = {
+  children: React.ReactNode;
+};
+
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: NewType) {
   return (
     <html lang="en" data-theme="mytheme">
       <body className={montserrat.className}>

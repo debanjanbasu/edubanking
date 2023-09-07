@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+"use client"
+import react from "react";
 
 interface UserSettings {
   name: string;
@@ -16,12 +17,12 @@ const initialSettings: UserSettings = {
   email: "",
 };
 
-const UserSettingsPage: React.FC = () => {
-  const [userSettings, setUserSettings] = useState<UserSettings>(initialSettings);
+function UserSettingsPage() {
+  const [userSettings, setUserSettings] = react.useState<UserSettings>(initialSettings);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setUserSettings((prevSettings) => ({
+    setUserSettings((prevSettings: any) => ({
       ...prevSettings,
       [name]: value,
     }));
@@ -35,7 +36,7 @@ const UserSettingsPage: React.FC = () => {
 
   return (
     <div style={{ color: "black" }}>
-      <h1 style={{  marginTop: "-200px", fontWeight: "bold", textShadow: "rgba(0, 0, 0, 0.1)", fontSize: "22px" }}>
+      <h1 style={{ marginTop: "-200px", fontWeight: "bold", textShadow: "rgba(0, 0, 0, 0.1)", fontSize: "22px" }}>
         My Details
       </h1>
       <form onSubmit={handleSubmit}>
@@ -46,8 +47,7 @@ const UserSettingsPage: React.FC = () => {
             name="name"
             value={userSettings.name}
             onChange={handleInputChange}
-            style={{ backgroundColor: "transparent", border: "none", padding: "5px", color:"grey" }}
-          />
+            style={{ backgroundColor: "transparent", border: "none", padding: "5px", color: "grey" }} />
         </label>
         <br />
         <label>
@@ -57,8 +57,7 @@ const UserSettingsPage: React.FC = () => {
             name="birthday"
             value={userSettings.birthday}
             onChange={handleInputChange}
-            style={{ backgroundColor: "transparent", border: "none", padding: "5px", color:"grey" }}
-          />
+            style={{ backgroundColor: "transparent", border: "none", padding: "5px", color: "grey" }} />
         </label>
         <br />
         <label>
@@ -68,8 +67,7 @@ const UserSettingsPage: React.FC = () => {
             name="email"
             value={userSettings.email}
             onChange={handleInputChange}
-            style={{ backgroundColor: "transparent", border: "none", padding: "5px", color:"grey" }}
-          />
+            style={{ backgroundColor: "transparent", border: "none", padding: "5px", color: "grey" }} />
         </label>
         <br />
         <label>
@@ -79,16 +77,15 @@ const UserSettingsPage: React.FC = () => {
             name="address"
             value={userSettings.address}
             onChange={handleInputChange}
-            style={{ backgroundColor: "transparent", border: "none", padding: "5px", color:"grey" }}
-          />
+            style={{ backgroundColor: "transparent", border: "none", padding: "5px", color: "grey" }} />
         </label>
         <br />
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-         <button type="submit" className="btn btn-outline btn-sm btn-primary text-xs">Save Settings</button>
+          <button type="submit" className="btn btn-outline btn-sm btn-primary text-xs">Save Settings</button>
         </div>
       </form>
     </div>
   );
-};
+}
 
 export default UserSettingsPage;

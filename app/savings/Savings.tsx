@@ -1,4 +1,3 @@
-import React from "react";
 
 const savingsGoals = [
   { goal: 'Online Games', amount: 20 },
@@ -6,7 +5,7 @@ const savingsGoals = [
   { goal: 'Long Term Savings', amount: 500 },
 ];
 
-const SavingsGoals: React.FC = () => {
+function SavingsGoals() {
   const gradientBackground = "linear-gradient(to bottom, #ffffff,#dedee1)";
 
   return (
@@ -24,7 +23,7 @@ const SavingsGoals: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default SavingsGoals;
 
