@@ -1,6 +1,11 @@
 # Edubanking
 A banking platform designed for educating kids on how banks, and accounts work in a fun and interactive way.
 
+## Vercel CLI
+1. Make sure you've got Vercel CLI installed
+2. Run `vercel login`
+3. Run `vercel env pull .env.local` - This would pull only the local development `.env.local` file for development purpose
+
 ## How to run
 1. Clone the repository
 2. Install PlanetScale CLI, and MYSQL CLI
