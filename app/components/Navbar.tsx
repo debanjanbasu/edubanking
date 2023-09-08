@@ -4,6 +4,10 @@ import wbc from "@westpac/wbc";
 import { WLogo } from "./Wlogo";
 import Image from "next/image";
 
+const avatarLoader = ({ src }) => {
+  return `https://api.dicebear.com/7.x/adventurer/svg?seed=${src}`;
+};
+
 export default function Navbar() {
   const handleLinkClick = () => {
     if (window.confirm("Home - Press OK to go there")) {
@@ -30,8 +34,11 @@ export default function Navbar() {
         <div className="avatar online" style={{ marginLeft: "30px" }}>
           <div className="w-10 rounded-full">
             <Image
-              src="https://api.dicebear.com/6.x/adventurer/svg?seed=George"
+              loader={avatarLoader}
+              src="George"
               alt={"Avatar"}
+              width={100}
+              height={100}
             />
           </div>
         </div>

@@ -27,6 +27,8 @@ export default async function TransTable() {
                       <Image
                         src="https://api.dicebear.com/6.x/adventurer/svg?seed=Max"
                         alt="avatar"
+                        width={100}
+                        height={100}
                       />
                     </div>
                   </div>
@@ -55,6 +57,8 @@ export default async function TransTable() {
                       <Image
                         src="https://api.dicebear.com/6.x/adventurer/svg?seed=Callie"
                         alt="avatar"
+                        width={100}
+                        height={100}
                       />{" "}
                     </div>
                   </div>
@@ -83,6 +87,8 @@ export default async function TransTable() {
                       <Image
                         src="https://api.dicebear.com/6.x/adventurer/svg?seed=Jasmine"
                         alt="avatar"
+                        width={100}
+                        height={100}
                       />
                     </div>
                   </div>
@@ -111,6 +117,8 @@ export default async function TransTable() {
                       <Image
                         src="https://api.dicebear.com/6.x/adventurer/svg?seed=Simba"
                         alt="avatar"
+                        width={100}
+                        height={100}
                       />
                     </div>
                   </div>
