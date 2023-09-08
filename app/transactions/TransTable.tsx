@@ -1,7 +1,8 @@
-import {prisma} from "../../lib/prisma"
+import Image from "next/image";
+import { prisma } from "../../lib/prisma";
 
 export default async function TransTable() {
-  let transactions = await prisma.transactions.findMany({})
+  let transactions = await prisma.transactions.findMany({});
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -23,7 +24,10 @@ export default async function TransTable() {
                 <div>
                   <div className="avatar">
                     <div className="mask mask-squircle w-10 h-10">
-                      <img src="https://api.dicebear.com/6.x/adventurer/svg?seed=Max" alt="avatar" />
+                      <Image
+                        src="https://api.dicebear.com/6.x/adventurer/svg?seed=Max"
+                        alt="avatar"
+                      />
                     </div>
                   </div>
                   <div className="font-bold">Hart Hagerty</div>
@@ -48,7 +52,11 @@ export default async function TransTable() {
                 <div>
                   <div className="avatar">
                     <div className="mask mask-squircle w-10 h-10">
-                      <img src="https://api.dicebear.com/6.x/adventurer/svg?seed=Callie" alt="avatar" />                    </div>
+                      <Image
+                        src="https://api.dicebear.com/6.x/adventurer/svg?seed=Callie"
+                        alt="avatar"
+                      />{" "}
+                    </div>
                   </div>
                   <div className="font-bold">Brice Swyre</div>
                 </div>
@@ -72,7 +80,10 @@ export default async function TransTable() {
                 <div>
                   <div className="avatar">
                     <div className="mask mask-squircle w-10 h-10">
-                      <img src="https://api.dicebear.com/6.x/adventurer/svg?seed=Jasmine" alt="avatar" />
+                      <Image
+                        src="https://api.dicebear.com/6.x/adventurer/svg?seed=Jasmine"
+                        alt="avatar"
+                      />
                     </div>
                   </div>
                   <div className="font-bold">Marjy Ferencz</div>
@@ -97,7 +108,10 @@ export default async function TransTable() {
                 <div>
                   <div className="avatar">
                     <div className="mask mask-squircle w-10 h-10">
-                      <img src="https://api.dicebear.com/6.x/adventurer/svg?seed=Simba" alt="avatar" />
+                      <Image
+                        src="https://api.dicebear.com/6.x/adventurer/svg?seed=Simba"
+                        alt="avatar"
+                      />
                     </div>
                   </div>
                   <div className="font-bold">Yancy Tear</div>
@@ -127,9 +141,7 @@ export default async function TransTable() {
             <th></th>
           </tr>
         </tfoot>
-
       </table>
     </div>
-  )
+  );
 }
-

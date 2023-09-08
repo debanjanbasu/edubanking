@@ -1,7 +1,8 @@
-"use client"
+"use client";
 import { GEL } from "@westpac/core";
 import wbc from "@westpac/wbc";
 import { WLogo } from "./Wlogo";
+import Image from "next/image";
 
 export default function Navbar() {
   const handleLinkClick = () => {
@@ -22,17 +23,19 @@ export default function Navbar() {
         }}
         onClick={handleLinkClick}
       >
-      <GEL brand={wbc}> 
-        <WLogo/>
-      </GEL>
+        <GEL brand={wbc}>
+          <WLogo />
+        </GEL>
         <h1>elcome to Westpac Edu</h1>
         <div className="avatar online" style={{ marginLeft: "30px" }}>
           <div className="w-10 rounded-full">
-            <img src="https://api.dicebear.com/6.x/adventurer/svg?seed=George" />
+            <Image
+              src="https://api.dicebear.com/6.x/adventurer/svg?seed=George"
+              alt={"Avatar"}
+            />
           </div>
         </div>
       </div>
     </nav>
   );
 }
-
