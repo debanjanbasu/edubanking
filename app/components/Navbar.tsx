@@ -4,7 +4,7 @@ import wbc from "@westpac/wbc";
 import { WLogo } from "./Wlogo";
 import Image from "next/image";
 
-const avatarLoader = ({ src }) => {
+const avatarLoader = ({ src } : { src: string }) => {
   return `https://api.dicebear.com/7.x/adventurer/svg?seed=${src}`;
 };
 

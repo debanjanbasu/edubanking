@@ -16,7 +16,7 @@
     "@mui/material": "^5.14.8",
     "@mui/x-date-pickers": "^6.12.1",
     "@planetscale/database": "^1.11.0",
-    "@prisma/client": "^5.2.0",
+    "@prisma/client": "^5.3.0",
     "@react-spring/web": "^9.7.3",
     "@tanstack/react-table": "^8.9.7",
     "@types/react": "^18.2.21",

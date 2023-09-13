@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { prisma } from "../../lib/prisma";
 
+const avatarLoader = ({ src }: { src: string }) => {
+  return `https://api.dicebear.com/6.x/adventurer/svg?seed=${src}`;
+};
+
 export default async function TransTable() {
   let transactions = await prisma.transactions.findMany({});
   return (
@@ -9,144 +13,38 @@ export default async function TransTable() {
         {/* head */}
         <thead>
           <tr>
-            <th>Name</th>
+            <th>ID</th>
+            <th>Description</th>
             <th>Reference</th>
             <th>💸Withdrawals</th>
             <th>💰Deposit</th>
             <th>💲Balance</th>
+            <th>⌚Time & Date</th>
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          <tr>
-            <td>
-              <div className="flex items-center space-x-3">
-                <div>
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-10 h-10">
-                      <Image
-                        src="https://api.dicebear.com/6.x/adventurer/svg?seed=Max"
-                        alt="avatar"
-                        width={100}
-                        height={100}
-                      />
-                    </div>
-                  </div>
-                  <div className="font-bold">Hart Hagerty</div>
-                </div>
-              </div>
-            </td>
-            <td>Purple</td>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-          </tr>
-          {/* row 2 */}
-          <tr>
-            <td>
-              <div className="flex items-center space-x-3">
-                <div>
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-10 h-10">
-                      <Image
-                        src="https://api.dicebear.com/6.x/adventurer/svg?seed=Callie"
-                        alt="avatar"
-                        width={100}
-                        height={100}
-                      />{" "}
-                    </div>
-                  </div>
-                  <div className="font-bold">Brice Swyre</div>
-                </div>
-              </div>
-            </td>
-            <td>Red</td>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-          </tr>
-          {/* row 3 */}
-          <tr>
-            <td>
-              <div className="flex items-center space-x-3">
-                <div>
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-10 h-10">
-                      <Image
-                        src="https://api.dicebear.com/6.x/adventurer/svg?seed=Jasmine"
-                        alt="avatar"
-                        width={100}
-                        height={100}
-                      />
-                    </div>
-                  </div>
-                  <div className="font-bold">Marjy Ferencz</div>
-                </div>
-              </div>
-            </td>
-            <td>Crimson</td>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-          </tr>
-          {/* row 4 */}
-          <tr>
-            <td>
-              <div className="flex items-center space-x-3">
-                <div>
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-10 h-10">
-                      <Image
-                        src="https://api.dicebear.com/6.x/adventurer/svg?seed=Simba"
-                        alt="avatar"
-                        width={100}
-                        height={100}
-                      />
-                    </div>
-                  </div>
-                  <div className="font-bold">Yancy Tear</div>
-                </div>
-              </div>
-            </td>
-            <td>Indigo</td>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-            <th>
-              <button className="btn btn-ghost btn-xs">$details</button>
-            </th>
-          </tr>
-        </tbody>
+            {transactions.map((transaction) => (
+              <tr key={transaction.id}>
+                <td>{transaction.id}</td>
+                <td>{transaction.name}</td>
+                <td>{transaction.reference}</td>
+                <td>{transaction.withdrawal?.toFixed(2)}</td>
+                <td>{transaction.deposit?.toFixed(2)}</td>
+                <td>{transaction.balance?.toFixed(2)}</td>
+                <td>{transaction.timestamp?.toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
         {/* foot */}
         <tfoot>
           <tr>
-            <th>Name</th>
+            <th>ID</th>
+            <th>Description</th>
             <th>Reference</th>
             <th>💸Withdrawls</th>
             <th>💰Deposit</th>
             <th>💲Balance</th>
-            <th></th>
+            <th>⌚Time & Date</th>
           </tr>
         </tfoot>
       </table>

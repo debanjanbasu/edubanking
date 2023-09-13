@@ -2,6 +2,7 @@
 import { BtmNav } from "../components/BtmNav";
 import DateDisplay from "./DateDisplay";
 import Table from "./Table";
+import TransTable from "./TransTable";
 
 export default function Transactions() {
   return (
@@ -28,7 +29,7 @@ export default function Transactions() {
             Transactions
             <DateDisplay />
           </div>
-          <Table />
+          <TransTable />
         </div>
         <BtmNav />
       </div>

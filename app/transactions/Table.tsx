@@ -1,20 +1,30 @@
 import { prisma } from "@/lib/prisma";
 
-export default async function Table() {
+export default async function TransactionTable() {
   try {
     const transactions = await prisma.transactions.findMany();
 
     return (
       <>
         <h1 className="font-bold text-2xl">Transactions</h1>
-        {transactions.map((transaction) => (
-          <div key={transaction.id} className="bg-wh m-2 w-[300px]">
-            <p>id: {transaction.id}</p>
-            <p>name: {transaction.name}</p>
-            <p>reference: {transaction.reference}</p>
-
-          </div>
-        ))}
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions.map((transaction) => (
+              <tr key={transaction.id}>
+                <td>{transaction.id}</td>
+                <td>{transaction.name}</td>
+                <td>{transaction.reference}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </>
     );
   } catch (error) {
@@ -22,4 +32,3 @@ export default async function Table() {
     return <p>Error fetching transactions</p>;
   }
 }
-

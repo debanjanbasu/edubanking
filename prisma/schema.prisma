@@ -8,13 +8,13 @@ datasource db {
   relationMode = "prisma"
 }
 
-
 model transactions {
   id         Int       @id @default(autoincrement())
   name       String    @db.VarChar(255)
   reference  Int?      @unique(map: "reference")
-  withdrawal Int?
-  deposit    Int?
-  balance    Int?
+  withdrawal Decimal?  @db.Decimal(10, 2)  // Use Decimal type with precision and scale
+  deposit    Decimal?  @db.Decimal(10, 2)  // Use Decimal type with precision and scale
+  balance    Decimal?  @db.Decimal(10, 2)  // Use Decimal type with precision and scale
   timestamp  DateTime? @default(now()) @db.Timestamp(0)
 }
+
