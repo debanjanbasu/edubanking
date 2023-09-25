@@ -19,12 +19,17 @@ export default function BalanceCard() {
           <div className="stat-value text-neutral">${bankAccount.balance}</div>
           <div className="stat-actions">
             <button
-              className="btn btn-sm btn-primary"
-              style={{ marginRight: "10px" }}
+              className="btn btn-sm btn-primary mr-2"
+              onClick={() => bankAccount.withdraw(50)}
             >
               Withdrawal
             </button>
-            <button className="btn btn-sm btn-success">Deposit</button>
+            <button
+              className="btn btn-sm btn-success"
+              onClick={() => bankAccount.deposit(50)}
+            >
+              Deposit
+            </button>
           </div>
         </div>
       </div>
