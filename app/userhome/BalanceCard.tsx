@@ -1,8 +1,10 @@
+'use client'
+import { useState } from "react";
 import createBankAccount from "../banking/bankaccount";
 
 export default function BalanceCard() {
   // Create an object for BankAccount with balance of $400
-  const bankAccount = createBankAccount(400);
+  const [bankAccount, deposit, withdraw] = useState(createBankAccount(400));
 
   return (
     <div
