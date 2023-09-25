@@ -1,5 +1,3 @@
-
-
 import BalanceCard from "./BalanceCard";
 import Link from "next/link";
 
