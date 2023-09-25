@@ -1,10 +1,20 @@
-'use client'
+"use client";
 import { useState } from "react";
 import createBankAccount from "../banking/bankaccount";
 
 export default function BalanceCard() {
   // Create an object for BankAccount with balance of $400
-  const [bankAccount, deposit, withdraw] = useState(createBankAccount(400));
+  const [bankAccount, setBankAccount] = useState(createBankAccount(400));
+
+  // Withdraw $50 from the account
+  const withdrawFromAccount = () => {
+    return setBankAccount(bankAccount.withdraw(50));
+  };
+
+  // Deposit $100 to the account
+  const depositToAccount = () => {
+    return setBankAccount(bankAccount.deposit(100));
+  };
 
   return (
     <div
@@ -22,13 +32,13 @@ export default function BalanceCard() {
           <div className="stat-actions">
             <button
               className="btn btn-sm btn-primary mr-2"
-              onClick={() => bankAccount.withdraw(50)}
+              onClick={() => withdrawFromAccount()}
             >
               Withdrawal
             </button>
             <button
               className="btn btn-sm btn-success"
-              onClick={() => bankAccount.deposit(50)}
+              onClick={() => depositToAccount()}
             >
               Deposit
             </button>

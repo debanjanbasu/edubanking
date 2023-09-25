@@ -7,14 +7,20 @@ interface BankAccount {
 const createBankAccount = (initialBalance: number): BankAccount => {
   let balance = initialBalance;
 
-  const deposit = (amount: number): void => {
+  const deposit = (amount: number): BankAccount => {
     balance += amount;
+    console.log("deposited: $", amount);
+    console.log("balance: $", balance);
+    return { balance, deposit, withdraw };
   };
-  const withdraw = (amount: number): void => {
+  const withdraw = (amount: number): BankAccount => {
     if (amount > balance) {
       throw new Error("Insufficient funds");
     }
     balance -= amount;
+    console.log("withdre: $", amount);
+    console.log("balance: $", balance);
+    return { balance, deposit, withdraw };
   };
 
   return { balance, deposit, withdraw };
