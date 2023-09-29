@@ -1,19 +1,45 @@
-"use client";
+'use client'
 import { useState } from "react";
+import Modal from "react-modal";
 import createBankAccount from "../banking/bankaccount";
 
-export default function BalanceCard() {
-  // Create an object for BankAccount with balance of $400
-  const [bankAccount, setBankAccount] = useState(createBankAccount(400));
+const accountOptions = [
+  { label: "Savings", value: 1 },
+  { label: "Everyday", value: 2 },
+];
 
-  // Withdraw $50 from the account
-  const withdrawFromAccount = () => {
-    return setBankAccount(bankAccount.withdraw(50));
+export default function BalanceCard() {
+  const [bankAccount, setBankAccount] = useState(createBankAccount(400));
+  const [withdrawAmount, setWithdrawAmount] = useState(0);
+  const [depositAmount, setDepositAmount] = useState(0);
+  const [selectedAccount, setSelectedAccount] = useState(accountOptions[0].value);
+
+  // Modal state
+  const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
+  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
+
+  const openWithdrawModal = () => setIsWithdrawModalOpen(true);
+  const closeWithdrawModal = () => setIsWithdrawModalOpen(false);
+
+  const openDepositModal = () => setIsDepositModalOpen(true);
+  const closeDepositModal = () => setIsDepositModalOpen(false);
+
+  // Withdrawal Function
+  const handleWithdrawal = () => {
+    if (withdrawAmount > 0) {
+      setBankAccount(bankAccount.withdraw(withdrawAmount));
+      setWithdrawAmount(0); // Reset the withdrawal amount input
+      closeWithdrawModal();
+    }
   };
 
-  // Deposit $100 to the account
-  const depositToAccount = () => {
-    return setBankAccount(bankAccount.deposit(100));
+  // Deposit Function 
+  const handleDeposit = () => {
+    if (depositAmount > 0) {
+      setBankAccount(bankAccount.deposit(depositAmount));
+      setDepositAmount(0);
+      closeDepositModal();
+    }
   };
 
   return (
@@ -22,7 +48,7 @@ export default function BalanceCard() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "calc(100vh - 400px)",
+        height: "calc(100vh - 300px)",
       }}
     >
       <div className="stats bg-accent text-primary-content">
@@ -32,19 +58,100 @@ export default function BalanceCard() {
           <div className="stat-actions">
             <button
               className="btn btn-sm btn-primary mr-2"
-              onClick={() => withdrawFromAccount()}
+              onClick={openWithdrawModal}
             >
-              Withdrawal
+              Withdraw
             </button>
             <button
               className="btn btn-sm btn-success"
-              onClick={() => depositToAccount()}
+              onClick={openDepositModal}
             >
               Deposit
             </button>
           </div>
         </div>
       </div>
+
+      {/* Withdraw Modal */}
+      <Modal
+        isOpen={isWithdrawModalOpen}
+        onRequestClose={closeWithdrawModal}
+        contentLabel="Withdraw Modal"
+
+        style={{
+          content: {
+            height: "50%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "10px",
+            backgroundColor: "#FDEDEC"
+          },
+        }}
+      >
+        <h2 className="stat-title text-neutral">Withdraw</h2>
+        <select
+          value={selectedAccount}
+          onChange={(e) => setSelectedAccount(parseInt(e.target.value))}
+        >
+          {accountOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <input
+          type="number"
+          placeholder="Enter amount"
+          value={withdrawAmount}
+          onChange={(e) => setWithdrawAmount(parseInt(e.target.value))}
+        />
+        <div style={{ marginTop: "10px" }}>
+          <button className="btn btn-sm btn-success mr-2" onClick={handleWithdrawal}>Withdraw</button>
+          <button className="btn btn-sm btn-primary mr-2" onClick={closeWithdrawModal} style={{ marginLeft: "20px" }}>Cancel</button>
+        </div>
+      </Modal>
+
+      {/* Deposit Modal */}
+      <Modal
+        isOpen={isDepositModalOpen}
+        onRequestClose={closeDepositModal}
+        contentLabel="Deposit Modal"
+        style={{
+          content: {
+            height: "50%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "10px",
+            backgroundColor: "#E8F8F5"
+          },
+        }}
+      >
+        <h2>Deposit</h2>
+        <select
+          value={selectedAccount}
+          onChange={(e) => setSelectedAccount(parseInt(e.target.value))}
+        >
+          {accountOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <input
+          type="number"
+          placeholder="Enter amount"
+          value={depositAmount}
+          onChange={(e) => setDepositAmount(parseInt(e.target.value))}
+        />
+        <div style={{ marginTop: "10px" }}>
+          <button className="btn btn-sm btn-success mr-2" onClick={handleDeposit}>Deposit</button>
+          <button className="btn btn-sm btn-primary mr-2" onClick={closeDepositModal} style={{ marginLeft: "20px" }}>Cancel</button>
+        </div>
+      </Modal>
     </div>
   );
 }

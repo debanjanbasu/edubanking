@@ -1,7 +1,7 @@
 interface BankAccount {
   balance: number;
-  deposit: (amount: number) => void;
-  withdraw: (amount: number) => void;
+  deposit: (amount: number) => BankAccount;
+  withdraw: (amount: number) => BankAccount;
 }
 
 const createBankAccount = (initialBalance: number): BankAccount => {
