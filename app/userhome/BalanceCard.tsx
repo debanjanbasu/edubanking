@@ -77,18 +77,7 @@ export default function BalanceCard() {
         isOpen={isWithdrawModalOpen}
         onRequestClose={closeWithdrawModal}
         contentLabel="Withdraw Modal"
-
-        style={{
-          content: {
-            height: "50%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: "10px",
-            backgroundColor: "#FDEDEC"
-          },
-        }}
+        className={"w-5/6 h-1/2 flex flex-col bg-red-200 rounded-lg p-4 shadow-lg items-center justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"}
       >
         <h2 className="stat-title text-neutral">Withdraw</h2>
         <select
@@ -118,19 +107,9 @@ export default function BalanceCard() {
         isOpen={isDepositModalOpen}
         onRequestClose={closeDepositModal}
         contentLabel="Deposit Modal"
-        style={{
-          content: {
-            height: "50%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: "10px",
-            backgroundColor: "#E8F8F5"
-          },
-        }}
+        className={"w-5/6 h-1/2 flex flex-col bg-teal-50 rounded-lg p-4 shadow-lg items-center justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"}
       >
-        <h2>Deposit</h2>
+        <h2 className="stat-title text-neutral">Deposit</h2>
         <select
           value={selectedAccount}
           onChange={(e) => setSelectedAccount(parseInt(e.target.value))}

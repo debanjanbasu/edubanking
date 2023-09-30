@@ -27,13 +27,3 @@ const createBankAccount = (initialBalance: number): BankAccount => {
 };
 
 export default createBankAccount;
-
-// const bankAccount = createBankAccount(400);
-
-// console.log('Initial balance: ', bankAccount.balance);
-
-// bankAccount.deposit(50);
-// console.log('New balance after deposit: ', bankAccount.balance);
-
-// bankAccount.withdraw(25);
-// console.log('New balance after withdrawal: ', bankAccount.balance);
