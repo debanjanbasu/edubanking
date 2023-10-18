@@ -1,4 +1,5 @@
-'use client'
+"use client"
+
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import createBankAccount from "../banking/bankaccount";
@@ -18,7 +19,7 @@ const accountOptions: AccountOption[] = [
   { label: "Goals", value: 3 },
 ];
 
-export default function BalanceCard({ lastBalance }: BalanceCardProps) {
+const BalanceCard: React.FC<BalanceCardProps> = ({ lastBalance }) => {
   const [bankAccount, setBankAccount] = useState(createBankAccount(lastBalance));
   const [withdrawAmount, setWithdrawAmount] = useState<number>(0);
   const [depositAmount, setDepositAmount] = useState<number>(0);
@@ -48,28 +49,37 @@ export default function BalanceCard({ lastBalance }: BalanceCardProps) {
   // Withdrawal Function
   const handleWithdrawal = () => {
     if (withdrawAmount > 0) {
-      setBankAccount(bankAccount.withdraw(withdrawAmount));
+      const updatedAccount = bankAccount.withdraw(withdrawAmount);
+      setBankAccount(updatedAccount);
       setWithdrawAmount(0); // Reset the withdrawal amount input
       closeWithdrawModal();
+      saveBalance(updatedAccount.balance);
     }
   };
 
   // Deposit Function
   const handleDeposit = () => {
     if (depositAmount > 0) {
-      setBankAccount(bankAccount.deposit(depositAmount));
+      const updatedAccount = bankAccount.deposit(depositAmount);
+      setBankAccount(updatedAccount);
       setDepositAmount(0);
       closeDepositModal();
+      saveBalance(updatedAccount.balance);
     }
   };
 
   // Transfer Function
   const handleTransfer = () => {
     if (transferAmount > 0) {
-      const updatedSourceAccount =
-        sourceAccount === 1 ? bankAccount.withdraw(transferAmount) : bankAccount;
-      const updatedTargetAccount =
-        targetAccount === 1 ? bankAccount.deposit(transferAmount) : bankAccount;
+      let updatedSourceAccount = bankAccount;
+      let updatedTargetAccount = bankAccount;
+
+      if (sourceAccount === 1) {
+        updatedSourceAccount = bankAccount.withdraw(transferAmount);
+      }
+      if (targetAccount === 1) {
+        updatedTargetAccount = bankAccount.deposit(transferAmount);
+      }
 
       // Update both source and target accounts
       setBankAccount(updatedSourceAccount);
@@ -77,21 +87,50 @@ export default function BalanceCard({ lastBalance }: BalanceCardProps) {
 
       setTransferAmount(0);
       closeTransferModal();
+
+      // Save the updated balance
+      saveBalance(updatedSourceAccount.balance);
     }
   };
 
+  // Function to save the balance to local storage
+  const saveBalance = (balance: number) => {
+    localStorage.setItem("bankAccountBalance", balance.toString());
+  };
 
+  // Retrieve the initial balance from local storage
+  useEffect(() => {
+    const savedBalance = localStorage.getItem("bankAccountBalance");
+    if (savedBalance) {
+      setBankAccount(createBankAccount(parseFloat(savedBalance)));
+    }
+  }, []);
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "calc(100vh - 300px)" }}>
+    <div className="flex justify-center items-center min-h-screen">
       <div className="stats bg-accent text-primary-content">
         <div className="stat">
           <div className="stat-title text-neutral">Current balance</div>
           <div className="stat-value text-neutral">${bankAccount.balance}</div>
           <div className="stat-actions">
-            <button className="btn btn-sm btn-primary mr-2" onClick={openWithdrawModal}>Withdraw</button>
-            <button className="btn btn-sm btn-success mr-2" onClick={openDepositModal}>Deposit</button>
-            <button className="btn btn-sm btn-primary mr-2" onClick={openTransferModal}>Transfer</button>
+            <button
+              className="btn btn-sm btn-primary mr-2"
+              onClick={openWithdrawModal}
+            >
+              Withdraw
+            </button>
+            <button
+              className="btn btn-sm btn-success mr-2"
+              onClick={openDepositModal}
+            >
+              Deposit
+            </button>
+            <button
+              className="btn btn-sm btn-primary mr-2"
+              onClick={openTransferModal}
+            >
+              Transfer
+            </button>
           </div>
         </div>
       </div>
@@ -123,8 +162,19 @@ export default function BalanceCard({ lastBalance }: BalanceCardProps) {
           onChange={(e) => setWithdrawAmount(parseInt(e.target.value))}
         />
         <div style={{ marginTop: "10px" }}>
-          <button className="btn btn-sm btn-success mr-2" onClick={handleWithdrawal}>Withdraw</button>
-          <button className="btn btn-sm btn-primary mr-2" onClick={closeWithdrawModal} style={{ marginLeft: "20px" }}>Cancel</button>
+          <button
+            className="btn btn-sm btn-success mr-2"
+            onClick={handleWithdrawal}
+          >
+            Withdraw
+          </button>
+          <button
+            className="btn btn-sm btn-primary mr-2"
+            onClick={closeWithdrawModal}
+            style={{ marginLeft: "20px" }}
+          >
+            Cancel
+          </button>
         </div>
       </Modal>
 
@@ -155,8 +205,19 @@ export default function BalanceCard({ lastBalance }: BalanceCardProps) {
           onChange={(e) => setDepositAmount(parseInt(e.target.value))}
         />
         <div style={{ marginTop: "10px" }}>
-          <button className="btn btn-sm btn-success mr-2" onClick={handleDeposit}>Deposit</button>
-          <button className="btn btn-sm btn-primary mr-2" onClick={closeDepositModal} style={{ marginLeft: "20px" }}>Cancel</button>
+          <button
+            className="btn btn-sm btn-success mr-2"
+            onClick={handleDeposit}
+          >
+            Deposit
+          </button>
+          <button
+            className="btn btn-sm btn-primary mr-2"
+            onClick={closeDepositModal}
+            style={{ marginLeft: "20px" }}
+          >
+            Cancel
+          </button>
         </div>
       </Modal>
 
@@ -199,10 +260,23 @@ export default function BalanceCard({ lastBalance }: BalanceCardProps) {
           onChange={(e) => setTransferAmount(parseInt(e.target.value))}
         />
         <div style={{ marginTop: "10px" }}>
-          <button className="btn btn-sm btn-success mr-2" onClick={handleTransfer}> Transfer </button>
-          <button className="btn btn-sm btn-primary" onClick={closeTransferModal} style={{ marginLeft: "20px" }}> Cancel </button>
+          <button
+            className="btn btn-sm btn-success mr-2"
+            onClick={handleTransfer}
+          >
+            Transfer
+          </button>
+          <button
+            className="btn btn-sm btn-primary"
+            onClick={closeTransferModal}
+            style={{ marginLeft: "20px" }}
+          >
+            Cancel
+          </button>
         </div>
       </Modal>
     </div>
   );
-}
+};
+
+export default BalanceCard;

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HelpLink() {
   return (
-    <div className="mt-8 flex flex-wrap justify-center gap-4">
+    <div className="mt-2 flex flex-wrap justify-center gap-2">
       <Link className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow hover:bg-primary focus:outline-none focus:ring active:bg-primary sm:w-auto" 
       href="https://www.westpac.com.au/personal-banking/online-banking/making-the-most/red-web-chat/">Contact Us</Link>{" "}
 
